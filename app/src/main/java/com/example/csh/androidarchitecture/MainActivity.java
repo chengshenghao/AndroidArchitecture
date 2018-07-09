@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.csh.androidarchitecture.model.db.AppDatabase;
 import com.example.csh.androidarchitecture.model.db.User;
+import com.example.csh.androidarchitecture.model.db.entity.Address;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -17,6 +18,12 @@ public class MainActivity extends AppCompatActivity {
         User user = new User();
         user.setLastName("ss");
         user.setFirstName("sss");
+        Address address = new Address();
+        address.city = "天津";
+        address.postCode = 10;
+        address.state ="直辖市";
+        address.street = "华苑";
+        user.setAddress(address);
         db.userDao().insertAll(user);
     }
 }

@@ -1,11 +1,14 @@
 package com.example.csh.androidarchitecture.model.db;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.graphics.Bitmap;
+
+import com.example.csh.androidarchitecture.model.db.entity.Address;
 
 /*
  * 这个组件代表一个持有数据库的一个表的类。对每一个entity，都会创建一个表来持有这些item。
@@ -15,10 +18,10 @@ import android.graphics.Bitmap;
 
 
 /*
-* 某个字段或者几个字段必须是唯一的。你可以通过把@Index注解的unique属性设置为true来实现唯一性。
-* 下面的代码防止了一个表中的两行数据出现firstName和lastName字段的值相同的情况：
-* indices = {@Index(value = {"firstName","last_name"},unique = true)}
-* */
+ * 某个字段或者几个字段必须是唯一的。你可以通过把@Index注解的unique属性设置为true来实现唯一性。
+ * 下面的代码防止了一个表中的两行数据出现firstName和lastName字段的值相同的情况：
+ * indices = {@Index(value = {"firstName","last_name"},unique = true)}
+ * */
 @Entity(tableName = "users")//默认数据库名是类名，添加tableName注解可以重新设置类名称
 public class User {
     @PrimaryKey(autoGenerate = true)
@@ -29,11 +32,11 @@ public class User {
     @ColumnInfo(name = "last_name")//默认列名为此属性名，column可以通过添加name修改名称
     private String lastName;
 
-    // Getters and setters are ignored for brevity,
-    // but they're required for Room to work.
-    /*
-     * 不会创建相应列
-     * */
+    @Embedded
+    public Address address;
+
+
+    //不会创建相应列
     @Ignore
     Bitmap picture;
 
@@ -61,5 +64,12 @@ public class User {
         this.lastName = lastName;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
 }

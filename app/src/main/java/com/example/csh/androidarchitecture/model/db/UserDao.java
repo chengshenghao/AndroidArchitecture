@@ -20,7 +20,7 @@ import java.util.List;
         @Query("SELECT * FROM users WHERE uid IN (:userIds)")
         List<User> loadAllByIds(int[] userIds);
      
-        @Query("SELECT * FROM users WHERE first_name LIKE :first AND "
+        @Query("SELECT * FROM users WHERE firstname LIKE :first AND "
                + "last_name LIKE :last LIMIT 1")
         User findByName(String first, String last);
      
