@@ -16,10 +16,9 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
-    @ColumnInfo(name = "first_name")
     private String firstName;
 
-    @ColumnInfo(name = "last_name")
+    @ColumnInfo(name = "last_name")//默认列名为此属性名，column可以通过添加name修改名称
     private String lastName;
 
     // Getters and setters are ignored for brevity,
