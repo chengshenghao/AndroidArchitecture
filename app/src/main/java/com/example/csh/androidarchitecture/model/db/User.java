@@ -3,6 +3,7 @@ package com.example.csh.androidarchitecture.model.db;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.graphics.Bitmap;
 
@@ -11,7 +12,14 @@ import android.graphics.Bitmap;
  * 你必须在Database类中的entities数组中引用这些entity类。
  * entity中的每一个field都将被持久化到数据库，除非使用了@Ignore注解。
  * */
-@Entity(tableName = "users")//默认数据库名是类名，添加此注解可以重新设置类名称
+
+
+/*
+* 某个字段或者几个字段必须是唯一的。你可以通过把@Index注解的unique属性设置为true来实现唯一性。
+* 下面的代码防止了一个表中的两行数据出现firstName和lastName字段的值相同的情况：
+* indices = {@Index(value = {"firstName","last_name"},unique = true)}
+* */
+@Entity(tableName = "users")//默认数据库名是类名，添加tableName注解可以重新设置类名称
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int uid;
@@ -24,10 +32,11 @@ public class User {
     // Getters and setters are ignored for brevity,
     // but they're required for Room to work.
     /*
-    * 不会创建相应列
-    * */
+     * 不会创建相应列
+     * */
     @Ignore
     Bitmap picture;
+
     public int getUid() {
         return uid;
     }
