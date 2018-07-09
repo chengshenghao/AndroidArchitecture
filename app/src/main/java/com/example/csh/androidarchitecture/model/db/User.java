@@ -4,6 +4,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+/*
+ * 这个组件代表一个持有数据库的一个表的类。对每一个entity，都会创建一个表来持有这些item。
+ * 你必须在Database类中的entities数组中引用这些entity类。
+ * entity中的每一个field都将被持久化到数据库，除非使用了@Ignore注解。
+ * */
 @Entity
 public class User {
     @PrimaryKey(autoGenerate = true)
